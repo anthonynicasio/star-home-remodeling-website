@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import { services } from '../../lib/services';
+import { siteConfig } from '../../lib/site-config';
+---
+
+<Layout
+  title={`Our Services | ${siteConfig.name}`}
+  description="Roofing, siding, windows, doors, gutters, and remodeling for Fairfax and the DMV."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold sm:text-4xl">Our services</h1>
+    <p class="prose-star mt-4 max-w-2xl">
+      Exterior and interior home improvements - one trusted local team for the whole project.
+    </p>
+
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => (
+        <a
+          href={`/services/${service.slug}`}
+          class="group rounded-[var(--radius-default)] border border-brand-300/40 bg-paper p-6 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-cta)]"
+        >
+          <h2 class="text-display text-xl font-bold group-hover:text-brand-700">{service.name}</h2>
+          <p class="prose-star mt-2 text-sm">{service.tagline}</p>
+          <span class="mt-4 inline-block text-sm font-semibold text-brand-700 group-hover:text-accent">
+            Learn more ->
+          </span>
+        </a>
+      ))}
+    </div>
+  </Section>
+</Layout>

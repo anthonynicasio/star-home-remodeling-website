@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import LeadForm from '../components/islands/LeadForm';
+import { siteConfig, getNapString } from '../lib/site-config';
+---
+
+<Layout
+  title={`Contact Us | ${siteConfig.name}`}
+  description={`Contact Star Home Remodeling in Fairfax, VA. Call ${siteConfig.phone.primary} or request a free estimate online.`}
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <h1 class="text-display text-3xl font-bold">Contact us</h1>
+        <p class="prose-star mt-4">
+          Questions about a project? We are here to help    by phone, email, or the form.
+        </p>
+
+        <dl class="mt-8 space-y-4 text-sm">
+          <div>
+            <dt class="font-semibold text-brand-900">Phone</dt>
+            <dd>
+              <a href={`tel:${siteConfig.phone.primaryTel}`} class="text-brand-700 hover:text-accent">
+                {siteConfig.phone.primary}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-brand-900">Email</dt>
+            <dd>
+              <a href={`mailto:${siteConfig.email}`} class="text-brand-700 hover:text-accent">
+                {siteConfig.email}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-brand-900">Address</dt>
+            <dd>{getNapString()}</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-brand-900">Hours</dt>
+            <dd>
+              <ul class="text-stone-400">
+                <li>{siteConfig.hours.weekdays}</li>
+                <li>{siteConfig.hours.saturday}</li>
+                <li>{siteConfig.hours.sunday}</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div id="callback">
+        <h2 class="text-display text-xl font-bold">Request an estimate</h2>
+        <div class="mt-4">
+          <LeadForm client:visible />
+        </div>
+      </div>
+    </div>
+  </Section>
+</Layout>

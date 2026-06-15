@@ -1,0 +1,18 @@
+---
+import { siteConfig } from '../lib/site-config';
+---
+
+<div>
+  <h2 class="text-display text-center text-2xl font-bold sm:text-3xl">Proudly serving the DMV</h2>
+  <p class="mx-auto mt-4 max-w-2xl text-center text-stone-400">
+    Fairfax, Arlington, Alexandria, Loudoun, Fairfax County, and the greater Washington metro area.
+  </p>
+  <ul class="mt-10 flex flex-wrap justify-center gap-3">
+    {siteConfig.serviceArea.map((city) => (
+      <li class="rounded-full border border-brand-300/50 bg-paper px-4 py-2 text-sm font-medium text-brand-900">
+        {city}
+      </li>
+    ))}
+  </ul>
+  <p class="mt-6 text-center text-xs text-stone-400">// TODO: confirm exact cities and counties with client</p>
+</div>

@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import LeadForm from '../components/islands/LeadForm';
+import { siteConfig } from '../lib/site-config';
+
+const servicesParam = Astro.url.searchParams.get('services');
+const initialServices = servicesParam ? servicesParam.split(',').filter(Boolean) : [];
+---
+
+<Layout
+  title={`Get a Free Estimate | ${siteConfig.name}`}
+  description="Request your free, no-pressure home improvement estimate. Roofing, siding, windows, doors, and more in Fairfax and the DMV."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <div class="mx-auto max-w-2xl">
+      <h1 class="text-display text-3xl font-bold sm:text-4xl">Get your free estimate</h1>
+      <p class="prose-star mt-3">
+        Answer a few quick questions and we will call you within one business day.
+      </p>
+      <div class="mt-8">
+        <LeadForm client:visible initialServices={initialServices} />
+      </div>
+    </div>
+  </Section>
+</Layout>

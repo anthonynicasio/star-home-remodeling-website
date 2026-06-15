@@ -1,0 +1,36 @@
+---
+interface Props {
+  as?: 'section' | 'div';
+  variant?: 'default' | 'tint' | 'stone' | 'dark';
+  roofline?: 'none' | 'top' | 'bottom';
+  class?: string;
+  id?: string;
+}
+
+const {
+  as: Tag = 'section',
+  variant = 'default',
+  roofline = 'none',
+  class: className = '',
+  id,
+} = Astro.props;
+
+const variants: Record<string, string> = {
+  default: 'bg-paper',
+  tint: 'bg-brand-50',
+  stone: 'bg-stone-100',
+  dark: 'bg-brand-900 text-paper',
+};
+
+const rooflineClass =
+  roofline === 'top' ? 'roofline-top' : roofline === 'bottom' ? 'roofline-bottom' : '';
+---
+
+<Tag
+  id={id}
+  class:list={['py-16 md:py-24 lg:py-28', variants[variant], rooflineClass, className]}
+>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <slot />
+  </div>
+</Tag>

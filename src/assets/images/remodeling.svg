@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Remodeling project placeholder">
+  <rect width="800" height="600" fill="#2F4008"/>
+  <rect x="100" y="150" width="600" height="350" fill="#F5F4F1"/>
+  <rect x="140" y="190" width="200" height="80" fill="#8FA86A"/>
+  <rect x="140" y="290" width="520" height="40" fill="#C8772E" opacity="0.6"/>
+  <rect x="140" y="350" width="520" height="100" fill="#527015" opacity="0.4"/>
+  <text x="400" y="560" text-anchor="middle" fill="#F3F6EC" font-family="system-ui" font-size="18" opacity="0.8">Remodeling</text>
+</svg>

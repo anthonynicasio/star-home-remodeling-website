@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Siding project placeholder">
+  <rect width="800" height="600" fill="#527015"/>
+  <rect x="150" y="150" width="500" height="350" fill="#8FA86A"/>
+  <rect x="200" y="200" width="80" height="120" fill="#C8772E" opacity="0.7"/>
+  <rect x="520" y="200" width="80" height="120" fill="#C8772E" opacity="0.7"/>
+  <text x="400" y="560" text-anchor="middle" fill="#F3F6EC" font-family="system-ui" font-size="18" opacity="0.8">Siding</text>
+</svg>

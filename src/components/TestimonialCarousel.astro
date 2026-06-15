@@ -1,0 +1,21 @@
+---
+import Testimonial from './Testimonial.astro';
+
+interface Review {
+  quote: string;
+  author: string;
+  location?: string;
+}
+
+interface Props {
+  reviews: Review[];
+}
+
+const { reviews } = Astro.props;
+---
+
+<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+  {reviews.map((review) => (
+    <Testimonial quote={review.quote} author={review.author} location={review.location} />
+  ))}
+</div>

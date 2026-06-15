@@ -1,0 +1,89 @@
+---
+import { siteConfig } from '../lib/site-config';
+import { services } from '../lib/services';
+import Logo from './Logo.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-brand-300/30 bg-paper/95 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <Logo />
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main">
+      <div class="group relative">
+        <button
+          type="button"
+          class="btn-ghost flex items-center gap-1 rounded-[var(--radius-default)] px-3 py-2 text-sm font-medium"
+          aria-expanded="false"
+          aria-haspopup="true"
+          id="services-menu-btn"
+        >
+          Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+        <div
+          class="invisible absolute left-0 top-full z-50 min-w-[220px] rounded-[var(--radius-default)] border border-brand-300/40 bg-paper py-2 opacity-0 shadow-[var(--shadow-card)] transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+          role="menu"
+        >
+          <a href="/services" class="block px-4 py-2 text-sm font-medium text-brand-900 hover:bg-brand-50" role="menuitem">All services</a>
+          {services.map((s) => (
+            <a
+              href={`/services/${s.slug}`}
+              class="block px-4 py-2 text-sm text-ink hover:bg-brand-50"
+              role="menuitem"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+      <a href="/gallery" class:list={['text-sm font-medium hover:text-brand-700', currentPath.startsWith('/gallery') && 'text-brand-700']}>Gallery</a>
+      <a href="/financing" class:list={['text-sm font-medium hover:text-brand-700', currentPath === '/financing' && 'text-brand-700']}>Financing</a>
+      <a href="/about" class:list={['text-sm font-medium hover:text-brand-700', currentPath === '/about' && 'text-brand-700']}>About</a>
+      <a href="/contact" class:list={['text-sm font-medium hover:text-brand-700', currentPath === '/contact' && 'text-brand-700']}>Contact</a>
+    </nav>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <a
+        href={`tel:${siteConfig.phone.primaryTel}`}
+        class="text-sm font-semibold text-brand-700 hover:text-accent"
+      >
+        {siteConfig.phone.primary}
+      </a>
+      <a href="/get-estimate" class="btn btn-primary text-sm">Free Estimate</a>
+    </div>
+
+    <details class="relative lg:hidden">
+      <summary class="btn-ghost list-none cursor-pointer rounded-[var(--radius-default)] p-2 [&::-webkit-details-marker]:hidden">
+        <span class="sr-only">Open menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </summary>
+      <nav
+        class="absolute right-0 top-full z-50 mt-2 w-64 rounded-[var(--radius-default)] border border-brand-300/40 bg-paper p-4 shadow-[var(--shadow-card)]"
+        aria-label="Mobile"
+      >
+        <a href="/services" class="block py-2 font-medium text-brand-900">Services</a>
+        {services.map((s) => (
+          <a href={`/services/${s.slug}`} class="block py-1.5 pl-3 text-sm text-ink">
+            {s.name}
+          </a>
+        ))}
+        <hr class="my-3 border-brand-300/40" />
+        <a href="/gallery" class="block py-2 text-sm">Gallery</a>
+        <a href="/financing" class="block py-2 text-sm">Financing</a>
+        <a href="/about" class="block py-2 text-sm">About</a>
+        <a href="/contact" class="block py-2 text-sm">Contact</a>
+        <hr class="my-3 border-brand-300/40" />
+        <a href={`tel:${siteConfig.phone.primaryTel}`} class="block py-2 font-semibold text-brand-700">
+          {siteConfig.phone.primary}
+        </a>
+        <a href="/get-estimate" class="btn btn-primary mt-3 w-full">Free Estimate</a>
+      </nav>
+    </details>
+  </div>
+</header>

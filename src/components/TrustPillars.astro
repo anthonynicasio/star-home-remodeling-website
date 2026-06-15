@@ -1,0 +1,31 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Pillar {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  pillars: Pillar[];
+}
+
+const { title = 'The Star difference', pillars } = Astro.props;
+---
+
+<div>
+  <h2 class="text-display text-center text-2xl font-bold sm:text-3xl">{title}</h2>
+  <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    {pillars.map((pillar) => (
+      <article class="rounded-[var(--radius-default)] bg-paper p-6 shadow-[var(--shadow-card)]">
+        <div class="flex h-12 w-12 items-center justify-center rounded-[var(--radius-default)] bg-brand-50 text-brand-700">
+          <Icon name={pillar.icon} class="h-6 w-6" aria-hidden="true" />
+        </div>
+        <h3 class="text-display mt-4 text-lg font-semibold">{pillar.title}</h3>
+        <p class="prose-star mt-2 text-sm">{pillar.description}</p>
+      </article>
+    ))}
+  </div>
+</div>

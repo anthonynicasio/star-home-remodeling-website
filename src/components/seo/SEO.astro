@@ -1,0 +1,39 @@
+---
+import { SEO } from 'astro-seo';
+import { siteConfig } from '../../lib/site-config';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, canonical, ogImage = '/og-image.png', noindex = false } = Astro.props;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteConfig.url).toString();
+---
+
+<SEO
+  title={title}
+  description={description}
+  canonical={canonicalUrl}
+  noindex={noindex}
+  openGraph={{
+    basic: {
+      title,
+      type: 'website',
+      image: new URL(ogImage, siteConfig.url).toString(),
+      url: canonicalUrl,
+    },
+    optional: {
+      description,
+      siteName: siteConfig.name,
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title,
+    description,
+  }}
+/>

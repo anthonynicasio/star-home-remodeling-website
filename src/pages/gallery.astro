@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../lib/site-config';
+
+const galleryItems = await getCollection('gallery');
+const categories = ['all', 'roofing', 'siding', 'windows', 'doors', 'gutters', 'remodeling'] as const;
+---
+
+<Layout
+  title={`Project Gallery | ${siteConfig.name}`}
+  description="Browse completed roofing, siding, window, and remodeling projects across Fairfax and the DMV."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold">Project gallery</h1>
+    <p class="prose-star mt-3 max-w-2xl">
+      Real work from homes across Northern Virginia and the DMV.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter by category">
+      {categories.map((cat) => (
+        <button
+          type="button"
+          class="min-h-11 rounded-full border border-brand-300/50 px-4 py-2 text-sm font-medium capitalize text-brand-900 hover:bg-brand-50"
+          data-filter={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="gallery-grid">
+      {galleryItems.map((item) => (
+        <figure
+          class="gallery-item overflow-hidden rounded-[var(--radius-default)] bg-stone-100 shadow-[var(--shadow-card)]"
+          data-category={item.data.category}
+        >
+          <img
+            src={item.data.image}
+            alt={item.data.alt}
+            width="400"
+            height="300"
+            class="aspect-[4/3] w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption class="p-4">
+            <p class="font-semibold text-brand-900">{item.data.title}</p>
+            {item.data.location && <p class="text-sm text-stone-400">{item.data.location}</p>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </Section>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const items = document.querySelectorAll('.gallery-item');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        items.forEach((item) => {
+          const cat = item.getAttribute('data-category');
+          const show = filter === 'all' || cat === filter;
+          (item as HTMLElement).style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</Layout>

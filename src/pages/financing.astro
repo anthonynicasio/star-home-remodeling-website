@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { siteConfig } from '../lib/site-config';
+---
+
+<Layout
+  title={`Financing Options | ${siteConfig.name}`}
+  description="Flexible financing for roofing, siding, windows, and home remodeling projects in Fairfax and the DMV."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold">Financing that fits your budget</h1>
+    <p class="prose-star mt-4 max-w-2xl">
+      A failing roof or drafty windows should not wait. We offer financing options so you can
+      protect your home now and pay over time.
+    </p>
+
+    <ul class="mt-8 grid gap-6 sm:grid-cols-3">
+      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
+        <h2 class="text-display font-bold">Flexible terms</h2>
+        <p class="prose-star mt-2 text-sm">Payment plans designed for real household budgets.</p>
+      </li>
+      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
+        <h2 class="text-display font-bold">Quick decisions</h2>
+        <p class="prose-star mt-2 text-sm">Apply during your estimate visit    no runaround.</p>
+      </li>
+      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
+        <h2 class="text-display font-bold">No surprises</h2>
+        <p class="prose-star mt-2 text-sm">Your project price is locked before work begins.</p>
+      </li>
+    </ul>
+
+    <p class="mt-8 text-sm text-stone-400">
+      // TODO: confirm financing partner details and application process with client
+    </p>
+
+    <a href="/get-estimate" class="btn btn-primary mt-6">Get a free estimate</a>
+  </Section>
+
+  <CtaBand />
+</Layout>

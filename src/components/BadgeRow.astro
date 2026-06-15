@@ -1,0 +1,29 @@
+---
+interface Badge {
+  name: string;
+  alt: string;
+}
+
+interface Props {
+  badges?: Badge[];
+}
+
+const { badges = [
+  { name: "BBB Accredited", alt: "BBB Accredited Business" },
+  { name: "GAF", alt: "GAF manufacturer partner" },
+  { name: "CertainTeed", alt: "CertainTeed partner" },
+  { name: "Owens Corning", alt: "Owens Corning partner" },
+] } = Astro.props;
+---
+
+<div class="flex flex-wrap items-center justify-center gap-8 opacity-80 grayscale">
+  {badges.map((badge) => (
+    <div
+      class="flex h-14 min-w-[120px] items-center justify-center rounded-[var(--radius-default)] border border-stone-400/30 bg-paper px-4 text-xs font-semibold uppercase tracking-wide text-stone-400"
+      title={badge.alt}
+    >
+      {badge.name}
+    </div>
+  ))}
+</div>
+<p class="mt-4 text-center text-xs text-stone-400">TODO: get logo assets and permission from client</p>

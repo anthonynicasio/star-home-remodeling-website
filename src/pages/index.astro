@@ -1,17 +1,163 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PromoBar from '../components/PromoBar.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ServiceQuiz from '../components/islands/ServiceQuiz';
+import ServiceShowcaseRow from '../components/ServiceShowcaseRow.astro';
+import TrustPillars from '../components/TrustPillars.astro';
+import BadgeRow from '../components/BadgeRow.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import ServiceAreaBlock from '../components/ServiceAreaBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import Schema from '../components/seo/Schema.astro';
+import { siteConfig, getNapString } from '../lib/site-config';
+import { services, heroImage, quizServices } from '../lib/services';
+import { getCollection } from 'astro:content';
 
+const reviews = await getCollection('reviews');
+const featuredReviews = reviews
+  .filter((r) => r.data.featured)
+  .map((r) => ({
+    quote: r.data.quote,
+    author: r.data.author,
+    location: r.data.location,
+  }));
+
+const pageTitle = `${siteConfig.name} | Roofing, Siding & Windows in Fairfax, VA`;
+const pageDescription = siteConfig.description;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'RoofingContractor',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  telephone: siteConfig.phone.primary,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: siteConfig.address.city,
+    addressRegion: siteConfig.address.state,
+    addressCountry: siteConfig.address.country,
+  },
+  areaServed: siteConfig.serviceArea.map((city) => ({ '@type': 'City', name: city })),
+  priceRange: '$$',
+  sameAs: [siteConfig.social.facebook].filter(Boolean),
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={pageTitle} description={pageDescription}>
+  <PromoBar slot="promo" />
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Schema schema={localBusinessSchema} />
+
+  <Hero
+    eyebrow="Fairfax & the DMV's trusted home contractor"
+    title="Roofs, siding & windows, done right the first time."
+    subtitle="Quality materials, local crews, and honest pricing - backed by a real warranty."
+    bullets={[
+      'Free, no-pressure estimates',
+      'Financing available',
+      'Licensed & insured', // TODO: confirm with client
+      'Local crews, not subcontractors', // TODO: confirm with client
+    ]}
+    image={heroImage}
+    imageAlt="Completed home exterior project in the Fairfax, Virginia area"
+  />
+
+  <Section variant="stone" id="quiz">
+    <ServiceQuiz client:visible services={quizServices} />
+  </Section>
+
+  <Section variant="tint">
+    <div class="text-center">
+      <h2 class="text-display text-2xl font-bold">Flexible financing for your project</h2>
+      <p class="prose-star mx-auto mt-3 max-w-xl">
+        Do not put off needed repairs. Ask about payment plans that fit your budget.
+      </p>
+      <a href="/financing" class="btn btn-secondary mt-6">Explore financing options</a>
+    </div>
+  </Section>
+
+  <Section>
+    <div class="space-y-20">
+      {services.map((service, index) => (
+        <ServiceShowcaseRow
+          title={service.showcaseHeadline}
+          kicker={service.name}
+          body={service.showcaseBody}
+          image={service.showcaseImage}
+          imageAlt={`${service.name} project by Star Home Remodeling`}
+          href={`/services/${service.slug}`}
+          ctaLabel={`Explore ${service.shortName.toLowerCase()} ->`}
+          reverse={index % 2 === 1}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section variant="stone" roofline="top">
+    <TrustPillars
+      pillars={[
+        {
+          icon: 'lucide:users',
+          title: 'People you can trust',
+          description: 'Vetted local crews who respect your home and your schedule.',
+        },
+        {
+          icon: 'lucide:file-text',
+          title: 'Straight answers',
+          description: 'Clear pricing and honest recommendations - no surprises on install day.',
+        },
+        {
+          icon: 'lucide:home',
+          title: 'Your home, our standard',
+          description: 'We treat every property like our own - clean sites, careful work.',
+        },
+        {
+          icon: 'lucide:handshake',
+          title: 'Start to finish',
+          description: 'From the first estimate to the final walkthrough, we stay with you.',
+        },
+      ]}
+    />
+  </Section>
+
+  <Section>
+    <BadgeRow />
+  </Section>
+
+  <Section variant="tint">
+    <ProcessSteps
+      steps={[
+        { title: 'Consult', description: 'Tell us what you need - by phone, form, or in person.' },
+        { title: 'Inspect', description: 'We visit your home and assess the project honestly.' },
+        { title: 'Proposal', description: 'You get a clear written estimate - no hidden fees.' },
+        { title: 'Install', description: 'Our local crew completes the work on schedule.' },
+        { title: 'Follow-up', description: 'We walk through the finished project together.' },
+      ]}
+    />
+  </Section>
+
+  <Section>
+    <h2 class="text-display mb-10 text-center text-2xl font-bold">What homeowners say</h2>
+    {featuredReviews.length > 0 ? (
+      <TestimonialCarousel reviews={featuredReviews} />
+    ) : (
+      <p class="text-center text-stone-400">// TODO: pull reviews from client's Google/Facebook</p>
+    )}
+  </Section>
+
+  <Section variant="stone">
+    <ServiceAreaBlock />
+  </Section>
+
+  <CtaBand />
+  <NewsletterSignup />
+</Layout>

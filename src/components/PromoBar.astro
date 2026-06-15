@@ -1,0 +1,16 @@
+---
+import { siteConfig } from '../lib/site-config';
+
+if (!siteConfig.promo.enabled) return null;
+---
+
+<div class="bg-brand-700 text-paper" role="region" aria-label="Promotional offer">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5 text-sm sm:px-6 lg:px-8">
+    <p>
+      {siteConfig.promo.message}
+      <a href={siteConfig.promo.href} class="ml-2 font-semibold underline hover:text-accent">
+        View details
+      </a>
+    </p>
+  </div>
+</div>

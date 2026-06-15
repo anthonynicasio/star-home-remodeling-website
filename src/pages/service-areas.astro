@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { siteConfig } from '../lib/site-config';
+---
+
+<Layout
+  title={`Service Areas | ${siteConfig.name}`}
+  description="Star Home Remodeling serves Fairfax, Arlington, Alexandria, Loudoun, and the greater Washington DC metro area."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold">Where we work</h1>
+    <p class="prose-star mt-4 max-w-2xl">
+      Based in Fairfax, we serve homeowners across Northern Virginia, Maryland, and Washington, DC.
+    </p>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      {siteConfig.serviceArea.map((city) => (
+        <article class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
+          <h2 class="text-display text-xl font-bold">{city}</h2>
+          <p class="prose-star mt-2 text-sm">
+            Roofing, siding, windows, doors, and gutters for {city} homeowners. Local crews, free estimates, financing available.
+          </p>
+          <a href="/get-estimate" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:text-accent">
+            Get an estimate in {city.split(',')[0]} -!
+          </a>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <CtaBand />
+</Layout>

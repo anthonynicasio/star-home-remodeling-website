@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Section from '../components/Section.astro';
+---
+
+<Layout title="Styleguide | Star Home Remodeling" description="Internal design system reference." noindex={true}>
+  <Header slot="header" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold">Styleguide</h1>
+
+    <h2 class="text-display mt-12 text-2xl font-bold">Colors</h2>
+    <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div class="h-20 rounded-[var(--radius-default)] bg-brand-900"></div>
+      <div class="h-20 rounded-[var(--radius-default)] bg-brand-700"></div>
+      <div class="h-20 rounded-[var(--radius-default)] bg-brand-500"></div>
+      <div class="h-20 rounded-[var(--radius-default)] bg-accent"></div>
+    </div>
+
+    <h2 class="text-display mt-12 text-2xl font-bold">Typography</h2>
+    <p class="text-3xl text-display font-bold">Display heading</p>
+    <p class="mt-2 text-base">Body text at 1rem / 1.6 line-height for readability.</p>
+
+    <h2 class="text-display mt-12 text-2xl font-bold">Buttons</h2>
+    <div class="mt-4 flex flex-wrap gap-4">
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-ghost">Ghost</button>
+    </div>
+
+    <h2 class="text-display mt-12 text-2xl font-bold">Roofline motif</h2>
+    <div class="roofline-top mt-4 bg-brand-50 p-12 text-center">Section with roofline-top</div>
+  </Section>
+</Layout>

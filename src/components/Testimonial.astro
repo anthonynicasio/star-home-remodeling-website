@@ -1,0 +1,20 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  quote: string;
+  author: string;
+  location?: string;
+}
+
+const { quote, author, location } = Astro.props;
+---
+
+<blockquote class="rounded-[var(--radius-default)] bg-paper p-8 shadow-[var(--shadow-card)]">
+  <Icon name="lucide:quote" class="h-8 w-8 text-brand-300" aria-hidden="true" />
+  <p class="mt-4 text-lg leading-relaxed text-ink">&ldquo;{quote}&rdquo;</p>
+  <footer class="mt-6">
+    <cite class="not-italic font-semibold text-brand-900">{author}</cite>
+    {location && <span class="text-stone-400"> - {location}</span>}
+  </footer>
+</blockquote>

@@ -1,0 +1,38 @@
+---
+import { siteConfig } from '../lib/site-config';
+---
+
+<section class="roofline-top bg-brand-900 py-16 text-paper md:py-20">
+  <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+    <h2 class="text-display text-2xl font-bold sm:text-3xl">Ready to get started?</h2>
+    <p class="mx-auto mt-4 max-w-xl text-brand-50/80">
+      Three easy ways to reach us    pick what works best for you.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-3">
+      <a
+        href="/get-estimate"
+        class="rounded-[var(--radius-default)] bg-accent p-6 text-paper shadow-[var(--shadow-cta)] transition-transform hover:-translate-y-0.5"
+      >
+        <p class="text-display text-lg font-bold">Get a free estimate</p>
+        <p class="mt-2 text-sm opacity-90">Tell us about your project online</p>
+      </a>
+      <a
+        href="/contact#callback"
+        class="rounded-[var(--radius-default)] border border-paper/20 bg-brand-800/50 p-6 transition-colors hover:border-accent"
+      >
+        <p class="text-display text-lg font-bold">Request a callback</p>
+        <p class="mt-2 text-sm text-brand-50/80">We will call at a time that works</p>
+      </a>
+      <a
+        href={`tel:${siteConfig.phone.primaryTel}`}
+        class="rounded-[var(--radius-default)] border border-paper/20 bg-brand-800/50 p-6 transition-colors hover:border-accent"
+      >
+        <p class="text-display text-lg font-bold">Call {siteConfig.phone.primary}</p>
+        <p class="mt-2 text-sm text-brand-50/80">
+          {siteConfig.hours.weekdays}
+        </p>
+      </a>
+    </div>
+  </div>
+</section>

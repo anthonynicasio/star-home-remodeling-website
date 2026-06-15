@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../lib/site-config';
+---
+
+<Layout
+  title={`Reviews | ${siteConfig.name}`}
+  description="Read what Fairfax and DMV homeowners say about Star Home Remodeling."
+>
+  <Header slot="header" />
+  <Footer slot="footer" />
+
+  <Section>
+    <h1 class="text-display text-3xl font-bold">Homeowner reviews</h1>
+    <p class="prose-star mt-3 max-w-2xl">
+      Real feedback from neighbors we have worked with. Rating: {siteConfig.rating} - {siteConfig.reviewCount} reviews
+    </p>
+
+    {
+      (await getCollection('reviews')).length > 0 ? (
+        <div class="mt-10">
+          <TestimonialCarousel
+            reviews={(await getCollection('reviews')).map((r) => ({
+              quote: r.data.quote,
+              author: r.data.author,
+              location: r.data.location,
+            }))}
+          />
+        </div>
+      ) : (
+        <p class="mt-8 text-stone-400">// TODO: populate with verified Google/Facebook reviews</p>
+      )
+    }
+  </Section>
+
+  <CtaBand />
+</Layout>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Placeholder  replace with client hero photo">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8FA86A"/>
+      <stop offset="50%" style="stop-color:#527015"/>
+      <stop offset="100%" style="stop-color:#2F4008"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <polygon points="960,200 400,700 1520,700" fill="#1A1C17" opacity="0.15"/>
+  <rect x="520" y="520" width="880" height="380" fill="#F5F4F1" opacity="0.9" rx="8"/>
+  <rect x="700" y="620" width="120" height="180" fill="#C8772E" opacity="0.6"/>
+  <rect x="1100" y="620" width="120" height="180" fill="#C8772E" opacity="0.6"/>
+  <text x="960" y="980" text-anchor="middle" fill="#F3F6EC" font-family="system-ui,sans-serif" font-size="24" opacity="0.7">TODO: Replace with DMV-area home exterior photo</text>
+</svg>

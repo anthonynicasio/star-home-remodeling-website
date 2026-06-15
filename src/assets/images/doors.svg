@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Doors project placeholder">
+  <rect width="800" height="600" fill="#3F5510"/>
+  <rect x="250" y="100" width="300" height="420" fill="#F5F4F1"/>
+  <rect x="370" y="280" width="20" height="20" fill="#C8772E"/>
+  <text x="400" y="560" text-anchor="middle" fill="#F3F6EC" font-family="system-ui" font-size="18" opacity="0.8">Doors</text>
+</svg>
