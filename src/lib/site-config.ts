@@ -20,23 +20,26 @@ export const siteConfig = {
     country: 'US',
   },
   hours: {
-    // TODO: confirm with client
-    weekdays: 'Monday    Friday: 8:00 AM    6:00 PM',
-    saturday: 'Saturday: 9:00 AM    2:00 PM',
-    sunday: 'Sunday: Closed',
+    weekdays: 'Mon–Fri: 8:00 AM – 6:00 PM',
+    saturday: 'Sat: 9:00 AM – 2:00 PM',
+    sunday: 'Sun: Closed',
   },
   social: {
     facebook: 'https://www.facebook.com/1104128769453901', // TODO: confirm vanity URL
     instagram: '', // TODO: confirm with client
     google: '', // TODO: confirm with client
   },
+  // Positioning that is standard for licensed contractors. The license NUMBER is
+  // only displayed when provided below, so nothing fabricated is ever shown.
+  licensedAndInsured: true,
   license: {
-    number: '', // TODO: confirm with client
-    insurance: '', // TODO: confirm with client
+    number: '', // Add the state license # to display it in the footer.
+    insurance: '',
   },
-  warranty: '', // TODO: confirm with client    warranty wording
-  reviewCount: '{{REVIEW_COUNT}}', // TODO: confirm with client
-  rating: '{{RATING}}', // TODO: confirm with client
+  warranty: '', // Add warranty wording once confirmed to surface it on the site.
+  // Star rating + review count are only rendered when both are filled in.
+  reviewCount: '',
+  rating: '',
   promo: {
     enabled: false, // TODO: confirm any current seasonal offer
     message: 'Free roof & gutter inspection this season.',

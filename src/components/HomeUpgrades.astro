@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Upgrade {
+  eyebrow: string;
+  title: string;
+  body: string;
+  icon: string;
+  image: string;
+  imageAlt: string;
+  features: string[];
+  href: string;
+  linkLabel: string;
+}
+
+const upgrades: Upgrade[] = [
+  {
+    eyebrow: 'Bathroom remodeling',
+    title: 'A bathroom that feels brand new',
+    body: 'From tired tile to a clean, modern retreat — we update vanities, showers, tubs, and finishes with watertight workmanship and a layout that fits how you actually use the space.',
+    icon: 'lucide:bath',
+    image: '/images/gallery/modern-bathroom-interior-with-decorative-elements.jpg',
+    imageAlt: 'Modern remodeled bathroom with a freestanding tub, neutral tile, and clean fixtures',
+    features: ['Tubs & walk-in showers', 'Vanities & tile', 'Fixtures & lighting'],
+    href: '/services/remodeling',
+    linkLabel: 'Explore remodeling',
+  },
+  {
+    eyebrow: 'Window replacement',
+    title: 'More light, less noise, lower bills',
+    body: 'Swap drafty, dated windows for energy-efficient units that brighten every room. Custom-measured and tightly fitted to seal out drafts, dampen street noise, and cut your energy costs.',
+    icon: 'lucide:grid-2x2',
+    image:
+      '/images/gallery/front-view-cozy-elegant-modern-living-room-with-gray-sofa-windows-with-decoration-wideangle-view-ar-916-job-id-4a72b12bdb3145bd868e17f34acd799f.jpg',
+    imageAlt: 'Bright, elegant living room with large energy-efficient replacement windows',
+    features: ['Double & triple-pane', 'Bow, bay & casement', 'Custom-fit installs'],
+    href: '/services/windows',
+    linkLabel: 'Explore windows',
+  },
+  {
+    eyebrow: 'Door replacement',
+    title: 'A first impression that seals tight',
+    body: 'Entry, french, and patio doors that boost curb appeal and security while shutting out drafts. Precision hardware and clean trim work make every entry feel solid and welcoming.',
+    icon: 'lucide:door-open',
+    image: '/images/gallery/front-door-city-house.jpg',
+    imageAlt: 'Elegant navy paneled entry door with an arched transom framed by brick and topiary',
+    features: ['Front & entry doors', 'French & patio doors', 'Storm doors'],
+    href: '/services/doors',
+    linkLabel: 'Explore doors',
+  },
+  {
+    eyebrow: 'Flooring',
+    title: 'Floors that ground the whole room',
+    body: 'Rich hardwood, durable luxury vinyl, and tile installed level, tight, and built to last. We help you choose materials that handle real life and tie your rooms together beautifully.',
+    icon: 'lucide:layout-grid',
+    image: '/images/gallery/little-girls-sisters-read-books-lying-floor-top-view.jpg',
+    imageAlt: 'Modern wood-plank flooring running throughout a bright, comfortable home',
+    features: ['Hardwood & engineered', 'Luxury vinyl plank', 'Tile & stone'],
+    href: '/get-estimate',
+    linkLabel: 'Ask about flooring',
+  },
+];
+---
+
+<div class="space-y-16 lg:space-y-24">
+  {
+    upgrades.map((u, i) => {
+      const imageFirst = i % 2 === 0;
+      return (
+        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div class={imageFirst ? 'lg:order-1' : 'lg:order-2'}>
+            <div class="relative">
+              <div class="absolute -inset-3 -z-10 rounded-[var(--radius-lg)] bg-brand-50/70" aria-hidden="true"></div>
+              <div class="overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]">
+                <img
+                  src={u.image}
+                  alt={u.imageAlt}
+                  width="640"
+                  height="480"
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-[4/3] w-full object-cover"
+                />
+              </div>
+              <span class="absolute -bottom-4 left-6 flex h-12 w-12 items-center justify-center rounded-full bg-paper text-brand-700 shadow-[var(--shadow-card)]">
+                <Icon name={u.icon} class="h-6 w-6" aria-hidden="true" />
+              </span>
+            </div>
+          </div>
+
+          <div class={imageFirst ? 'lg:order-2' : 'lg:order-1'}>
+            <p class="eyebrow">{u.eyebrow}</p>
+            <h3 class="text-display mt-3 text-2xl font-bold text-brand-900 sm:text-3xl">{u.title}</h3>
+            <p class="prose-star mt-4 max-w-xl">{u.body}</p>
+            <ul class="mt-6 flex flex-wrap gap-2.5">
+              {u.features.map((f) => (
+                <li class="inline-flex items-center gap-1.5 rounded-full border border-brand-900/10 bg-paper px-3.5 py-1.5 text-sm font-medium text-brand-900">
+                  <Icon name="lucide:check" class="h-4 w-4 text-accent" aria-hidden="true" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a href="/get-estimate" class="btn btn-primary">Get a Free Quote</a>
+              <a href={u.href} class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-accent">
+                {u.linkLabel}
+                <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>

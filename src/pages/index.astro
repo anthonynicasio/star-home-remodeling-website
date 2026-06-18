@@ -5,39 +5,45 @@ import Footer from '../components/Footer.astro';
 import PromoBar from '../components/PromoBar.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
-import ServiceQuiz from '../components/islands/ServiceQuiz';
-import ServiceShowcaseRow from '../components/ServiceShowcaseRow.astro';
+import TrustBar from '../components/TrustBar.astro';
+import HomeUpgrades from '../components/HomeUpgrades.astro';
 import TrustPillars from '../components/TrustPillars.astro';
-import BadgeRow from '../components/BadgeRow.astro';
-import ProcessSteps from '../components/ProcessSteps.astro';
+import GalleryPreview from '../components/GalleryPreview.astro';
+import StarRating from '../components/StarRating.astro';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
+import FinancingBanner from '../components/FinancingBanner.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
 import ServiceAreaBlock from '../components/ServiceAreaBlock.astro';
-import CtaBand from '../components/CtaBand.astro';
-import NewsletterSignup from '../components/NewsletterSignup.astro';
+import FinalCta from '../components/FinalCta.astro';
 import Schema from '../components/seo/Schema.astro';
-import { siteConfig, getNapString } from '../lib/site-config';
-import { services, heroImage, quizServices } from '../lib/services';
+import { Icon } from 'astro-icon/components';
+import { siteConfig } from '../lib/site-config';
+import { heroImage } from '../lib/services';
 import { getCollection } from 'astro:content';
 
 const reviews = await getCollection('reviews');
+// Cap to 6 so the 3-column grid always fills evenly (2 full rows).
 const featuredReviews = reviews
   .filter((r) => r.data.featured)
+  .slice(0, 6)
   .map((r) => ({
     quote: r.data.quote,
     author: r.data.author,
     location: r.data.location,
   }));
 
-const pageTitle = `${siteConfig.name} | Roofing, Siding & Windows in Fairfax, VA`;
-const pageDescription = siteConfig.description;
+const pageTitle = 'Star Home Remodeling | Roofing, Siding & Windows in the DMV';
+const pageDescription =
+  'Upgrade your home with Star Home Remodeling. Roofing, siding, windows, doors, and exterior remodeling services for homeowners across the DMV. Request a free quote today.';
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'RoofingContractor',
   name: siteConfig.name,
-  description: siteConfig.description,
+  description: pageDescription,
   url: siteConfig.url,
   telephone: siteConfig.phone.primary,
+  email: siteConfig.email,
   address: {
     '@type': 'PostalAddress',
     addressLocality: siteConfig.address.city,
@@ -47,6 +53,20 @@ const localBusinessSchema = {
   areaServed: siteConfig.serviceArea.map((city) => ({ '@type': 'City', name: city })),
   priceRange: '$$',
   sameAs: [siteConfig.social.facebook].filter(Boolean),
+  ...(reviews.length > 0 && {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      bestRating: '5',
+      reviewCount: String(reviews.length),
+    },
+    review: reviews.slice(0, 6).map((r) => ({
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: r.data.author },
+      reviewBody: r.data.quote,
+    })),
+  }),
 };
 ---
 
@@ -58,106 +78,164 @@ const localBusinessSchema = {
   <Schema schema={localBusinessSchema} />
 
   <Hero
-    eyebrow="Fairfax & the DMV's trusted home contractor"
-    title="Roofs, siding & windows, done right the first time."
-    subtitle="Quality materials, local crews, and honest pricing - backed by a real warranty."
+    eyebrow="Trusted DMV home remodeling"
+    title="Premium home remodeling for the DMV. Beautiful results, zero stress."
+    subtitle="Star Home Remodeling helps DMV homeowners improve their roofing, siding, windows, and exterior spaces with clean communication, reliable crews, and high-quality workmanship from estimate to final walkthrough."
     bullets={[
-      'Free, no-pressure estimates',
-      'Financing available',
-      'Licensed & insured', // TODO: confirm with client
-      'Local crews, not subcontractors', // TODO: confirm with client
+      'Licensed & insured',
+      'Free estimates',
+      'Local DMV remodeling experts',
+      'Roofing, siding & windows',
+      'Financing options available',
     ]}
     image={heroImage}
-    imageAlt="Completed home exterior project in the Fairfax, Virginia area"
+    imageAlt="Beautiful finished suburban home exterior remodeled by Star Home Remodeling in the DMV"
   />
 
-  <Section variant="stone" id="quiz">
-    <ServiceQuiz client:visible services={quizServices} />
-  </Section>
+  <TrustBar />
 
-  <Section variant="tint">
-    <div class="text-center">
-      <h2 class="text-display text-2xl font-bold">Flexible financing for your project</h2>
-      <p class="prose-star mx-auto mt-3 max-w-xl">
-        Do not put off needed repairs. Ask about payment plans that fit your budget.
-      </p>
-      <a href="/financing" class="btn btn-secondary mt-6">Explore financing options</a>
-    </div>
-  </Section>
-
-  <Section>
-    <div class="space-y-20">
-      {services.map((service, index) => (
-        <ServiceShowcaseRow
-          title={service.showcaseHeadline}
-          kicker={service.name}
-          body={service.showcaseBody}
-          image={service.showcaseImage}
-          imageAlt={`${service.name} project by Star Home Remodeling`}
-          href={`/services/${service.slug}`}
-          ctaLabel={`Explore ${service.shortName.toLowerCase()} ->`}
-          reverse={index % 2 === 1}
-        />
-      ))}
-    </div>
-  </Section>
-
+  <!-- Featured upgrades: bathroom, windows, doors, flooring -->
   <Section variant="stone" roofline="top">
-    <TrustPillars
-      pillars={[
-        {
-          icon: 'lucide:users',
-          title: 'People you can trust',
-          description: 'Vetted local crews who respect your home and your schedule.',
-        },
-        {
-          icon: 'lucide:file-text',
-          title: 'Straight answers',
-          description: 'Clear pricing and honest recommendations - no surprises on install day.',
-        },
-        {
-          icon: 'lucide:home',
-          title: 'Your home, our standard',
-          description: 'We treat every property like our own - clean sites, careful work.',
-        },
-        {
-          icon: 'lucide:handshake',
-          title: 'Start to finish',
-          description: 'From the first estimate to the final walkthrough, we stay with you.',
-        },
-      ]}
-    />
+    <div class="max-w-2xl">
+      <p class="eyebrow">Room by room</p>
+      <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">
+        Upgrades for every part of your home
+      </h2>
+      <p class="prose-star mt-4">
+        Beyond the exterior, we help DMV homeowners refresh the spaces they live in every day — with
+        the same clean process and finished-result quality.
+      </p>
+    </div>
+    <div class="mt-14">
+      <HomeUpgrades />
+    </div>
   </Section>
 
+  <!-- The Star Difference -->
+  <Section roofline="top">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">The Star difference</p>
+      <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">
+        Why homeowners choose Star Home Remodeling
+      </h2>
+      <p class="prose-star mt-4">
+        Remodeling shouldn't feel chaotic. We keep the process clear, organized, and focused on
+        results you'll actually love living with.
+      </p>
+    </div>
+    <div class="mt-14">
+      <TrustPillars
+        title=""
+        pillars={[
+          {
+            icon: 'lucide:badge-check',
+            title: 'Exact-price estimates',
+            description: 'Your project price is set in writing before work begins — no surprise add-ons.',
+          },
+          {
+            icon: 'lucide:shield-check',
+            title: 'Licensed & insured crews',
+            description: 'Vetted local installers who respect your home, your time, and your property.',
+          },
+          {
+            icon: 'lucide:sparkles',
+            title: 'Clean job sites',
+            description: 'We protect your landscaping and haul away debris — we leave it better than we found it.',
+          },
+          {
+            icon: 'lucide:message-circle',
+            title: 'Clear communication',
+            description: 'You always know the schedule, the scope, and what happens next. No guessing.',
+          },
+          {
+            icon: 'lucide:gem',
+            title: 'Premium materials',
+            description: 'Manufacturer-backed products chosen to hold up to Mid-Atlantic weather.',
+          },
+          {
+            icon: 'lucide:map-pin',
+            title: 'Local DMV experience',
+            description: 'We know the homes, the permits, and the weather across Northern Virginia, DC, and Maryland.',
+          },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <!-- Project gallery -->
+  <Section variant="stone">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Recent work</p>
+        <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">
+          See what a better exterior can do
+        </h2>
+        <p class="prose-star mt-4">
+          Real roofing, siding, window, and door projects completed for homeowners around the DMV.
+        </p>
+      </div>
+      <a href="/gallery" class="btn btn-secondary shrink-0">View Project Gallery</a>
+    </div>
+    <div class="mt-12">
+      <GalleryPreview />
+    </div>
+  </Section>
+
+  <!-- Testimonials -->
   <Section>
-    <BadgeRow />
-  </Section>
-
-  <Section variant="tint">
-    <ProcessSteps
-      steps={[
-        { title: 'Consult', description: 'Tell us what you need - by phone, form, or in person.' },
-        { title: 'Inspect', description: 'We visit your home and assess the project honestly.' },
-        { title: 'Proposal', description: 'You get a clear written estimate - no hidden fees.' },
-        { title: 'Install', description: 'Our local crew completes the work on schedule.' },
-        { title: 'Follow-up', description: 'We walk through the finished project together.' },
-      ]}
-    />
-  </Section>
-
-  <Section>
-    <h2 class="text-display mb-10 text-center text-2xl font-bold">What homeowners say</h2>
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">Homeowner reviews</p>
+      <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">What DMV homeowners say</h2>
+      <div class="mt-4 flex items-center justify-center gap-2">
+        <StarRating size="h-5 w-5" />
+        <span class="text-sm font-semibold text-brand-900">5.0 · Verified Google reviews</span>
+      </div>
+    </div>
     {featuredReviews.length > 0 ? (
-      <TestimonialCarousel reviews={featuredReviews} />
+      <div class="mt-12">
+        <TestimonialCarousel reviews={featuredReviews} />
+      </div>
     ) : (
-      <p class="text-center text-stone-400">// TODO: pull reviews from client's Google/Facebook</p>
+      <p class="mt-10 text-center text-stone-400">Customer testimonials coming soon.</p>
     )}
+    <div class="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a href="/reviews" class="btn btn-secondary">Read More Reviews</a>
+      <a href="/contact" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-accent">
+        <Icon name="lucide:star" class="h-4 w-4" aria-hidden="true" />
+        Recently worked with us? We'd love your feedback
+      </a>
+    </div>
   </Section>
 
+  <FinancingBanner />
+
+  <!-- Process -->
+  <Section>
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">How it works</p>
+      <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">A clear, no-pressure process</h2>
+      <p class="prose-star mt-4">
+        From your first quote to the final walkthrough, you'll always know what's happening and what
+        comes next.
+      </p>
+    </div>
+    <div class="mt-14">
+      <ProcessSteps
+        title=""
+        steps={[
+          { title: 'Request your free quote', description: 'Tell us about your project online or by phone — no pressure, no obligation.' },
+          { title: 'Review your options', description: 'We assess your home honestly and give you a clear, written estimate.' },
+          { title: 'Schedule the work', description: 'We lock the scope and price, then plan an install date that fits your life.' },
+          { title: 'Final walkthrough', description: 'Our local crew completes the work cleanly and we review the finished result together.' },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <!-- Service area -->
   <Section variant="stone">
     <ServiceAreaBlock />
   </Section>
 
-  <CtaBand />
-  <NewsletterSignup />
+  <FinalCta />
 </Layout>

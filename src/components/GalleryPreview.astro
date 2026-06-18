@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('gallery');
+// Lead with featured projects, then fill to six with the rest.
+const featured = all.filter((g) => g.data.featured);
+const rest = all.filter((g) => !g.data.featured);
+const items = [...featured, ...rest].slice(0, 6);
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {items.map((item) => (
+    <figure class="group relative overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]">
+      <img
+        src={item.data.image}
+        alt={item.data.alt}
+        width="500"
+        height="375"
+        loading="lazy"
+        class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/10 to-transparent opacity-90"></div>
+      <figcaption class="absolute inset-x-0 bottom-0 p-4">
+        <span class="text-xs font-semibold uppercase tracking-wide text-gold">{item.data.category}</span>
+        <p class="text-display text-base font-bold text-paper">{item.data.title}</p>
+        {item.data.location && (
+          <p class="text-xs text-paper/80">{item.data.location}</p>
+        )}
+      </figcaption>
+    </figure>
+  ))}
+</div>

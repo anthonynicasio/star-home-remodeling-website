@@ -32,7 +32,7 @@ export default function ServiceQuiz({ services }: ServiceQuizProps) {
         What can we help you with?
       </h2>
       <p className="mt-2 text-sm text-stone-400">
-        Select all that apply    we will prefill your estimate request.
+        Select all that apply — we'll prefill your estimate request.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3" role="group" aria-label="Services needed">

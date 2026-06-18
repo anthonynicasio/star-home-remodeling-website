@@ -4,32 +4,51 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import CtaBand from '../components/CtaBand.astro';
+import { Image } from 'astro:assets';
+import aboutFamily from '../assets/images/about-family.jpg';
 import { siteConfig } from '../lib/site-config';
 ---
 
 <Layout
   title={`About Us | ${siteConfig.name}`}
-  description="Family-run home remodeling contractor serving Fairfax, Virginia and the greater DMV since    learn our story."
+  description="Star Home Remodeling is a local, family-run contractor serving Fairfax, Virginia and the greater DMV with roofing, siding, windows, and exterior remodeling."
 >
   <Header slot="header" />
   <Footer slot="footer" />
 
   <Section>
-    <h1 class="text-display text-3xl font-bold sm:text-4xl">Built on trust, not volume</h1>
-    <div class="prose-star mt-6 max-w-3xl space-y-4 text-base">
-      <p>
-        Star Home Remodeling is a family-run contractor based in Fairfax, Virginia. We focus on the
-        projects that protect and improve your home    roofing, siding, windows, doors, gutters, and
-        thoughtful interior updates.
-      </p>
-      <p>
-        We are not a national call center. When you work with us, you get local crews who know
-        Mid-Atlantic homes and weather. We show up when we say we will, explain your options in
-        plain language, and stand behind our work.
-      </p>
-      <p class="text-sm text-stone-400">
-        // TODO: confirm years in business and team details with client    do not invent stats
-      </p>
+    <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="eyebrow">About us</p>
+        <h1 class="text-display mt-3 text-3xl font-bold sm:text-4xl">Built on trust, not volume</h1>
+        <div class="prose-star mt-6 space-y-4 text-base">
+          <p>
+            Star Home Remodeling is a family-run contractor based in Fairfax, Virginia. We focus on the
+            projects that protect and improve your home — roofing, siding, windows, doors, gutters, and
+            thoughtful interior updates.
+          </p>
+          <p>
+            We are not a national call center. When you work with us, you get local crews who know
+            Mid-Atlantic homes and weather. We show up when we say we will, explain your options in
+            plain language, and stand behind our work.
+          </p>
+          <p>
+            Our focus is simple: protect your home, improve its curb appeal, and make the whole process
+            feel calm and predictable — from the first estimate to the final walkthrough.
+          </p>
+        </div>
+        <a href="/get-estimate" class="btn btn-primary mt-8">Get a Free Quote</a>
+      </div>
+      <div class="overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]">
+        <Image
+          src={aboutFamily}
+          alt="A family admiring their newly remodeled home exterior in the DMV"
+          class="h-full w-full object-cover"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          loading="eager"
+        />
+      </div>
     </div>
   </Section>
 
@@ -49,8 +68,8 @@ import { siteConfig } from '../lib/site-config';
         <p class="mt-1 text-sm text-stone-400">Manufacturer-backed products installed correctly.</p>
       </li>
       <li class="rounded-[var(--radius-default)] bg-paper p-5 shadow-[var(--shadow-card)]">
-        <strong class="text-brand-900">BBB accredited</strong>
-        <p class="mt-1 text-sm text-stone-400">A track record you can verify.</p>
+        <strong class="text-brand-900">Clean, on-time crews</strong>
+        <p class="mt-1 text-sm text-stone-400">We protect your property and leave the site spotless.</p>
       </li>
     </ul>
   </Section>

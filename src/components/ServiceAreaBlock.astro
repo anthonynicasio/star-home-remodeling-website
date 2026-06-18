@@ -1,18 +1,38 @@
 ---
 import { siteConfig } from '../lib/site-config';
+import { Icon } from 'astro-icon/components';
 ---
 
-<div>
-  <h2 class="text-display text-center text-2xl font-bold sm:text-3xl">Proudly serving the DMV</h2>
-  <p class="mx-auto mt-4 max-w-2xl text-center text-stone-400">
-    Fairfax, Arlington, Alexandria, Loudoun, Fairfax County, and the greater Washington metro area.
-  </p>
-  <ul class="mt-10 flex flex-wrap justify-center gap-3">
+<div class="grid items-center gap-12 lg:grid-cols-2">
+  <div>
+    <p class="eyebrow">Service area</p>
+    <h2 class="text-display mt-3 text-2xl font-bold sm:text-3xl">Proudly serving the DMV</h2>
+    <p class="prose-star mt-4 max-w-xl">
+      Based in Fairfax, our local crews work with homeowners across Washington, DC, Northern
+      Virginia, and the Maryland suburbs. If your home is in the metro area, we can likely help.
+    </p>
+    <div class="mt-6 rounded-[var(--radius-default)] border border-brand-900/10 bg-brand-50 p-5">
+      <p class="text-sm font-semibold text-brand-900">Not sure if we cover your neighborhood?</p>
+      <p class="prose-star mt-1 text-sm">Call us or request a free quote — we'll let you know right away.</p>
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+        <a href="/get-estimate" class="btn btn-primary text-sm">Request a Free Quote</a>
+        <a
+          href={`tel:${siteConfig.phone.primaryTel}`}
+          class="btn btn-secondary text-sm"
+        >
+          <Icon name="lucide:phone" class="h-4 w-4" aria-hidden="true" />
+          {siteConfig.phone.primary}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="grid grid-cols-2 gap-3">
     {siteConfig.serviceArea.map((city) => (
-      <li class="rounded-full border border-brand-300/50 bg-paper px-4 py-2 text-sm font-medium text-brand-900">
+      <li class="flex items-center gap-2.5 rounded-[var(--radius-default)] border border-brand-900/10 bg-paper px-4 py-3 text-sm font-medium text-brand-900 shadow-[var(--shadow-soft)]">
+        <Icon name="lucide:map-pin" class="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
         {city}
       </li>
     ))}
   </ul>
-  <p class="mt-6 text-center text-xs text-stone-400">// TODO: confirm exact cities and counties with client</p>
 </div>

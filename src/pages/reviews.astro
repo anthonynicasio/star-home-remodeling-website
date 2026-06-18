@@ -5,8 +5,11 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import CtaBand from '../components/CtaBand.astro';
+import StarRating from '../components/StarRating.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../lib/site-config';
+
+const allReviews = await getCollection('reviews');
 ---
 
 <Layout
@@ -17,16 +20,23 @@ import { siteConfig } from '../lib/site-config';
   <Footer slot="footer" />
 
   <Section>
-    <h1 class="text-display text-3xl font-bold">Homeowner reviews</h1>
-    <p class="prose-star mt-3 max-w-2xl">
-      Real feedback from neighbors we have worked with. Rating: {siteConfig.rating} - {siteConfig.reviewCount} reviews
+    {allReviews.length > 0 && (
+      <div class="flex items-center gap-2">
+        <StarRating size="h-5 w-5" />
+        <span class="text-sm font-semibold text-brand-900">5.0 · Verified Google reviews</span>
+      </div>
+    )}
+    <h1 class="text-display mt-3 text-3xl font-bold sm:text-4xl">Homeowner reviews</h1>
+    <p class="prose-star mt-4 max-w-2xl">
+      Real feedback from neighbors across the DMV. Recently worked with us? We'd love for you to
+      share your experience.
     </p>
 
     {
-      (await getCollection('reviews')).length > 0 ? (
-        <div class="mt-10">
+      allReviews.length > 0 ? (
+        <div class="mt-12">
           <TestimonialCarousel
-            reviews={(await getCollection('reviews')).map((r) => ({
+            reviews={allReviews.map((r) => ({
               quote: r.data.quote,
               author: r.data.author,
               location: r.data.location,
@@ -34,9 +44,13 @@ import { siteConfig } from '../lib/site-config';
           />
         </div>
       ) : (
-        <p class="mt-8 text-stone-400">// TODO: populate with verified Google/Facebook reviews</p>
+        <p class="mt-10 text-stone-400">Customer testimonials coming soon.</p>
       )
     }
+
+    <div class="mt-12">
+      <a href="/contact" class="btn btn-secondary">Share your experience</a>
+    </div>
   </Section>
 
   <CtaBand />

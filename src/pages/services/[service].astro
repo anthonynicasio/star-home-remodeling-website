@@ -53,12 +53,22 @@ const breadcrumbSchema = {
   <Footer slot="footer" />
   <Schema schema={[serviceSchema, breadcrumbSchema]} />
 
-  <section class="relative overflow-hidden bg-brand-900 py-20 text-paper">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <p class="text-sm font-semibold uppercase tracking-wide text-brand-300">{service.name}</p>
-      <h1 class="text-display mt-2 max-w-2xl text-3xl font-bold sm:text-4xl">{service.tagline}</h1>
+  <section class="relative overflow-hidden bg-brand-900 text-paper">
+    <Image
+      src={service.heroImage}
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 h-full w-full object-cover opacity-30"
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-900 via-brand-900/90 to-brand-900/60"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
+      <p class="eyebrow text-gold">{service.name}</p>
+      <h1 class="text-display mt-3 max-w-2xl text-3xl font-bold text-paper sm:text-4xl">{service.tagline}</h1>
       <p class="mt-4 max-w-xl text-brand-50/90">{service.description}</p>
-      <a href="/get-estimate" class="btn btn-primary mt-8">Get my free estimate</a>
+      <a href="/get-estimate" class="btn btn-primary mt-8">Get a Free Quote</a>
     </div>
   </section>
 
@@ -76,9 +86,9 @@ const breadcrumbSchema = {
         </ul>
       </div>
       <Image
-        src={service.heroImage}
-        alt={`${service.name} by Star Home Remodeling`}
-        class="rounded-[var(--radius-default)] shadow-[var(--shadow-card)]"
+        src={service.showcaseImage}
+        alt={`${service.name} project completed by Star Home Remodeling in the DMV`}
+        class="rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]"
         widths={[400, 600, 800]}
         sizes="(max-width: 1024px) 100vw, 50vw"
       />

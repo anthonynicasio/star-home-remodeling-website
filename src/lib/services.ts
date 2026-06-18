@@ -8,15 +8,16 @@ import guttersSvg from '../assets/images/gutters.svg';
 import remodelingSvg from '../assets/images/remodeling.svg';
 
 const assetModules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/images/*.{jpg,jpeg,png,svg}',
+  '../assets/images/*.{jpg,jpeg,png,webp,svg}',
   { eager: true }
 );
 
 function pickImage(stem: string, svgFallback: ImageMetadata): ImageMetadata {
-  const jpgKey = Object.keys(assetModules).find((k) => k.endsWith(`/${stem}.jpg`));
-  if (jpgKey) return assetModules[jpgKey].default;
-  const jpegKey = Object.keys(assetModules).find((k) => k.endsWith(`/${stem}.jpeg`));
-  if (jpegKey) return assetModules[jpegKey].default;
+  // Prefer real photos (jpg/jpeg/png/webp) over the SVG placeholder.
+  for (const ext of ['jpg', 'jpeg', 'png', 'webp']) {
+    const key = Object.keys(assetModules).find((k) => k.endsWith(`/${stem}.${ext}`));
+    if (key) return assetModules[key].default;
+  }
   const svgKey = Object.keys(assetModules).find((k) => k.endsWith(`/${stem}.svg`));
   if (svgKey) return assetModules[svgKey].default;
   return svgFallback;
@@ -36,6 +37,9 @@ export interface Service {
   shortName: string;
   tagline: string;
   description: string;
+  icon: string;
+  cardDescription: string;
+  subServices: string[];
   heroImage: ImageMetadata;
   showcaseImage: ImageMetadata;
   showcaseHeadline: string;
@@ -54,6 +58,16 @@ export const services: Service[] = [
     tagline: 'Stop the leaks before they start.',
     description:
       'From storm damage repairs to full roof replacements, we install quality shingles and metal systems built for Mid-Atlantic weather — wind, rain, ice, and heat.',
+    icon: 'lucide:home',
+    cardDescription:
+      'Protect your home with durable roofing installed by reliable local crews and built for Mid-Atlantic weather.',
+    subServices: [
+      'Asphalt Shingle Roofing',
+      'Metal Roofing',
+      'Flat & Low-Slope Roofing',
+      'Roof Repair',
+      'Storm & Hail Damage',
+    ],
     heroImage: pickImage('roofing-completed', roofingSvg),
     showcaseImage: pickImage('roofing-install', roofingSvg),
     showcaseHeadline: 'Stop the leaks before they start.',
@@ -88,6 +102,16 @@ export const services: Service[] = [
     tagline: 'Curb appeal that holds up to four seasons.',
     description:
       'Replace worn or damaged siding with durable materials that protect your home and refresh its look — installed by crews who treat your property like their own.',
+    icon: 'lucide:layers',
+    cardDescription:
+      'Refresh your exterior with siding that improves protection and gives your home a cleaner, updated look.',
+    subServices: [
+      'Vinyl Siding',
+      'Fiber Cement Siding',
+      'Composite Siding',
+      'Siding Repair',
+      'Trim, Soffit & Fascia',
+    ],
     heroImage: pickImage('siding-bay', sidingSvg),
     showcaseImage: pickImage('siding-upper', sidingSvg),
     showcaseHeadline: 'Curb appeal that holds up to four seasons.',
@@ -117,6 +141,17 @@ export const services: Service[] = [
     tagline: 'Stop the drafts and lower your energy bills.',
     description:
       'Energy-efficient replacement windows that cut drafts, reduce noise, and brighten rooms — measured and installed for a tight, lasting fit.',
+    icon: 'lucide:grid-2x2',
+    cardDescription:
+      'Improve comfort, curb appeal, and energy efficiency with modern replacement windows.',
+    subServices: [
+      'Double-Hung Windows',
+      'Bow & Bay Windows',
+      'Casement Windows',
+      'Awning Windows',
+      'Sliding Windows',
+      'Picture & Specialty Windows',
+    ],
     heroImage: pickImage('windows-double-hung', windowsSvg),
     showcaseImage: pickImage('windows-install', windowsSvg),
     showcaseHeadline: 'Stop the drafts and lower your energy bills.',
@@ -146,6 +181,16 @@ export const services: Service[] = [
     tagline: 'A welcoming entry that seals tight.',
     description:
       'Entry and patio doors that improve security, curb appeal, and weather sealing — installed with precision hardware and clean trim work.',
+    icon: 'lucide:door-open',
+    cardDescription:
+      'Upgrade your entry points with secure, stylish doors that make a stronger first impression.',
+    subServices: [
+      'Front Entry Doors',
+      'French Doors',
+      'Sliding Glass Doors',
+      'Patio Doors',
+      'Storm Doors',
+    ],
     heroImage: pickImage('doors-entry', doorsSvg),
     showcaseImage: pickImage('doors-sliding', doorsSvg),
     showcaseHeadline: 'A welcoming entry that seals tight.',
@@ -169,8 +214,17 @@ export const services: Service[] = [
     tagline: 'Move water away from your foundation.',
     description:
       'Seamless gutters and gutter protection that keep water flowing where it belongs — protecting your roofline, siding, and foundation.',
-    heroImage: guttersSvg,
-    showcaseImage: guttersSvg,
+    icon: 'lucide:droplets',
+    cardDescription:
+      'Keep water moving away from your roofline and foundation with seamless gutters and gutter guards.',
+    subServices: [
+      'Seamless Gutters',
+      'Gutter Guards & Protection',
+      'Downspouts',
+      'Gutter Repair',
+    ],
+    heroImage: pickImage('gutters', guttersSvg),
+    showcaseImage: pickImage('gutters', guttersSvg),
     showcaseHeadline: 'Move water away from your foundation.',
     showcaseBody:
       'Clogged or sagging gutters cause fascia rot and basement moisture. We install systems sized right for your roof.',
@@ -192,6 +246,15 @@ export const services: Service[] = [
     tagline: 'Thoughtful updates, room by room.',
     description:
       'Kitchen refreshes, bath updates, and interior remodeling projects managed with the same care we bring to exterior work.',
+    icon: 'lucide:hammer',
+    cardDescription:
+      'Thoughtful interior and exterior updates managed with clear scope, clean sites, and steady communication.',
+    subServices: [
+      'Kitchen Remodeling',
+      'Bathroom Remodeling',
+      'Sunrooms & Additions',
+      'Interior Updates',
+    ],
     heroImage: pickImage('remodeling-bath', remodelingSvg),
     showcaseImage: pickImage('remodeling-interior', remodelingSvg),
     showcaseHeadline: 'Thoughtful updates, room by room.',

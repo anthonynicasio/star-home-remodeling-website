@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import { siteConfig } from '../lib/site-config';
+import { Icon } from 'astro-icon/components';
+import ctaHome from '../assets/images/cta-home.jpg';
+---
+
+<section class="roofline-top relative overflow-hidden bg-brand-900 text-paper">
+  <Image
+    src={ctaHome}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 h-full w-full object-cover opacity-45"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/82 to-brand-900/60"></div>
+
+  <div class="relative mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 md:py-24 lg:px-8">
+    <p class="eyebrow text-gold">Ready when you are</p>
+    <h2 class="text-display mt-4 text-3xl font-bold text-paper sm:text-4xl">
+      Ready to upgrade your home?
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-brand-50/85">
+      Tell us what you want to improve and we'll help you take the next step with a clear,
+      no-pressure estimate.
+    </p>
+    <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a href="/get-estimate" class="btn btn-primary">Get a Free Quote</a>
+      <a
+        href={`tel:${siteConfig.phone.primaryTel}`}
+        class="btn btn-secondary border-paper/30 text-paper hover:bg-paper hover:text-brand-900"
+      >
+        <Icon name="lucide:phone" class="h-4 w-4" aria-hidden="true" />
+        Call {siteConfig.phone.primary}
+      </a>
+    </div>
+  </div>
+</section>

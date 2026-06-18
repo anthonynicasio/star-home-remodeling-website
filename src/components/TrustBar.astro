@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface TrustItem {
+  icon: string;
+  label: string;
+}
+
+const items: TrustItem[] = [
+  { icon: 'lucide:shield-check', label: 'Licensed & Insured' },
+  { icon: 'lucide:map-pin', label: 'Local DMV Crews' },
+  { icon: 'lucide:clipboard-check', label: 'Free Estimates' },
+  { icon: 'lucide:gem', label: 'Quality Materials' },
+  { icon: 'lucide:message-circle', label: 'Clear Communication' },
+];
+---
+
+<div class="border-y border-brand-900/5 bg-paper">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-5 px-4 py-6 sm:px-6 md:grid-cols-5 md:py-5 lg:px-8">
+    {items.map((item) => (
+      <div class="flex items-center justify-center gap-2.5 text-center md:justify-start">
+        <Icon name={item.icon} class="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+        <span class="text-sm font-semibold text-brand-900">{item.label}</span>
+      </div>
+    ))}
+  </div>
+</div>

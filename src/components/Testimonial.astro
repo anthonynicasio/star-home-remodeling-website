@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import StarRating from './StarRating.astro';
 
 interface Props {
   quote: string;
@@ -10,11 +11,15 @@ interface Props {
 const { quote, author, location } = Astro.props;
 ---
 
-<blockquote class="rounded-[var(--radius-default)] bg-paper p-8 shadow-[var(--shadow-card)]">
-  <Icon name="lucide:quote" class="h-8 w-8 text-brand-300" aria-hidden="true" />
-  <p class="mt-4 text-lg leading-relaxed text-ink">&ldquo;{quote}&rdquo;</p>
-  <footer class="mt-6">
+<blockquote class="card flex h-full flex-col p-6">
+  <div class="flex items-center justify-between">
+    <StarRating size="h-5 w-5" />
+    <Icon name="lucide:quote" class="h-7 w-7 text-brand-300" aria-hidden="true" />
+  </div>
+  <p class="mt-4 flex-1 leading-relaxed text-ink">&ldquo;{quote}&rdquo;</p>
+  <footer class="mt-6 flex items-center gap-2">
     <cite class="not-italic font-semibold text-brand-900">{author}</cite>
-    {location && <span class="text-stone-400"> - {location}</span>}
+    {location && <span class="text-sm text-stone-400">· {location}</span>}
+    <span class="ml-auto text-xs font-medium text-stone-400">via Google</span>
   </footer>
 </blockquote>

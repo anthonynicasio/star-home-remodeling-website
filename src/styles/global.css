@@ -1,33 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand - green-rooted, warm, architectural (refined from #527015) */
-  --color-brand-900: #2f4008;
-  --color-brand-700: #3f5510;
-  --color-brand-500: #527015;
-  --color-brand-300: #8fa86a;
-  --color-brand-50: #f3f6ec;
-  --color-accent: #c8772e;
-  --color-gold: #B59A5B;
-  --color-ink: #1a1c17;
-  --color-paper: #ffffff;
-  --color-stone-100: #f5f4f1;
-  --color-stone-400: #9a9a93;
+  /* Brand - premium hunter/forest green estate palette */
+  --color-brand-900: #0f2a1b; /* deepest hunter green - dark sections & headings */
+  --color-brand-800: #163d28; /* dark green */
+  --color-brand-700: #1e5235; /* primary green - links & secondary buttons */
+  --color-brand-500: #2e7d4f; /* mid green */
+  --color-brand-300: #9dbca8; /* sage - muted text on dark & borders */
+  --color-brand-50: #ecf3ee;  /* light green tint - hover surfaces */
+
+  --color-accent: #c8951c;     /* warm gold - primary CTA */
+  --color-accent-600: #b3831a; /* gold hover */
+  --color-gold: #d4af37;       /* champagne gold - fine detail */
+
+  --color-ink: #1f2a24;     /* charcoal text */
+  --color-paper: #ffffff;   /* white cards */
+  --color-canvas: #faf8f3;  /* warm off-white page background */
+  --color-stone-100: #f4f1ea; /* warm stone - alt sections */
+  --color-stone-400: #5d635d; /* muted gray-green - secondary text */
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
 
-  --text-xs: 0.875rem;
+  --text-xs: 0.8125rem;
   --text-sm: 1rem;
   --text-base: 1.125rem;
   --text-lg: 1.5rem;
   --text-xl: 2rem;
   --text-2xl: 2.75rem;
-  --text-3xl: 3.75rem;
+  --text-3xl: 3.5rem;
+  --text-4xl: 4.25rem;
 
-  --radius-default: 10px;
-  --shadow-card: 0 4px 24px rgb(26 28 23 / 0.08);
-  --shadow-cta: 0 8px 32px rgb(200 119 46 / 0.25);
+  --radius-default: 14px;
+  --radius-lg: 22px;
+  --shadow-card: 0 1px 2px rgb(15 42 27 / 0.04), 0 10px 30px rgb(15 42 27 / 0.07);
+  --shadow-cta: 0 10px 28px rgb(200 149 28 / 0.28);
+  --shadow-soft: 0 1px 3px rgb(15 42 27 / 0.05);
 }
 
 @layer base {
@@ -54,7 +62,7 @@
     font-size: var(--text-sm);
     line-height: 1.6;
     color: var(--color-ink);
-    background-color: var(--color-paper);
+    background-color: var(--color-canvas);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -76,15 +84,15 @@
 
 @layer components {
   .btn {
-    @apply inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-[var(--radius-default)] px-6 py-3 text-sm font-semibold transition-colors;
+    @apply inline-flex min-h-12 min-w-11 items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-200;
   }
 
   .btn-primary {
-    @apply bg-accent text-paper hover:bg-[#b36826] shadow-[var(--shadow-cta)];
+    @apply bg-accent text-brand-900 hover:bg-accent-600 shadow-[var(--shadow-cta)] hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply border-2 border-brand-700 bg-transparent text-brand-700 hover:bg-brand-50;
+    @apply border-2 border-brand-700 bg-transparent text-brand-700 hover:bg-brand-700 hover:text-paper;
   }
 
   .btn-ghost {
@@ -100,12 +108,20 @@
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 50% 100%, 0 calc(100% - 2.5rem));
   }
 
+  .card {
+    @apply rounded-[var(--radius-lg)] border border-brand-900/5 bg-paper shadow-[var(--shadow-card)];
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand-700;
+  }
+
   .prose-star {
     @apply text-stone-400 leading-relaxed;
   }
 
   .prose-star strong {
-    @apply text-ink font-medium;
+    @apply text-ink font-semibold;
   }
 }
 
@@ -114,5 +130,9 @@
     font-family: var(--font-display), system-ui, sans-serif;
     line-height: 1.05;
     letter-spacing: -0.02em;
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 }

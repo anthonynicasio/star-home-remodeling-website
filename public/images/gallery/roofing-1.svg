@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Roofing project placeholder">
-  <rect width="800" height="600" fill="#3F5510"/>
-  <polygon points="400,80 120,320 680,320" fill="#2F4008"/>
-  <rect x="200" y="320" width="400" height="220" fill="#F5F4F1"/>
-  <text x="400" y="560" text-anchor="middle" fill="#F3F6EC" font-family="system-ui" font-size="18" opacity="0.8">Roofing</text>
-</svg>

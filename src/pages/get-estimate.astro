@@ -19,9 +19,11 @@ const initialServices = servicesParam ? servicesParam.split(',').filter(Boolean)
 
   <Section>
     <div class="mx-auto max-w-2xl">
-      <h1 class="text-display text-3xl font-bold sm:text-4xl">Get your free estimate</h1>
-      <p class="prose-star mt-3">
-        Answer a few quick questions and we will call you within one business day.
+      <p class="eyebrow">Free quote</p>
+      <h1 class="text-display mt-3 text-3xl font-bold sm:text-4xl">Get your free estimate</h1>
+      <p class="prose-star mt-4">
+        Answer a few quick questions and we'll reach out within one business day. No pressure, no
+        obligation — just a clear estimate for your project.
       </p>
       <div class="mt-8">
         <LeadForm client:visible initialServices={initialServices} />

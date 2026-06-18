@@ -1,8 +1,8 @@
 {
   "title": "Bathroom remodel",
   "category": "remodeling",
-  "image": "/images/gallery/remodeling-bath.jpg",
-  "alt": "Updated bathroom finishes and fixtures",
-  "location": "Northern Virginia",
-  "featured": true
+  "image": "/images/gallery/modern-bathroom-interior-with-decorative-elements.jpg",
+  "alt": "Modern remodeled bathroom with a freestanding tub and neutral tile",
+  "location": "Fairfax County, VA",
+  "featured": false
 }

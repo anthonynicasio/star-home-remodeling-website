@@ -8,39 +8,37 @@ import { siteConfig } from '../lib/site-config';
 ---
 
 <Layout
-  title={`Financing Options | ${siteConfig.name}`}
-  description="Flexible financing for roofing, siding, windows, and home remodeling projects in Fairfax and the DMV."
+  title={`Project Planning & Payment Options | ${siteConfig.name}`}
+  description="Plan your roofing, siding, window, or exterior remodeling project on a timeline that fits your budget. Free estimates across Fairfax and the DMV."
 >
   <Header slot="header" />
   <Footer slot="footer" />
 
   <Section>
-    <h1 class="text-display text-3xl font-bold">Financing that fits your budget</h1>
+    <p class="eyebrow">Project planning</p>
+    <h1 class="text-display mt-3 text-3xl font-bold sm:text-4xl">Plan your project on a timeline that fits</h1>
     <p class="prose-star mt-4 max-w-2xl">
-      A failing roof or drafty windows should not wait. We offer financing options so you can
-      protect your home now and pay over time.
+      A failing roof or drafty windows shouldn't have to wait. We'll help you plan the work in a way
+      that fits your budget — and we'll walk through available payment options during your free
+      estimate.
     </p>
 
-    <ul class="mt-8 grid gap-6 sm:grid-cols-3">
-      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
-        <h2 class="text-display font-bold">Flexible terms</h2>
-        <p class="prose-star mt-2 text-sm">Payment plans designed for real household budgets.</p>
+    <ul class="mt-10 grid gap-6 sm:grid-cols-3">
+      <li class="card p-7">
+        <h2 class="text-display text-lg font-bold">Clear, written pricing</h2>
+        <p class="prose-star mt-2 text-sm">Your project price is set in writing before any work begins.</p>
       </li>
-      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
-        <h2 class="text-display font-bold">Quick decisions</h2>
-        <p class="prose-star mt-2 text-sm">Apply during your estimate visit    no runaround.</p>
+      <li class="card p-7">
+        <h2 class="text-display text-lg font-bold">Plan it in phases</h2>
+        <p class="prose-star mt-2 text-sm">Prioritize the most urgent work now and stage the rest over time.</p>
       </li>
-      <li class="rounded-[var(--radius-default)] border border-brand-300/40 p-6">
-        <h2 class="text-display font-bold">No surprises</h2>
-        <p class="prose-star mt-2 text-sm">Your project price is locked before work begins.</p>
+      <li class="card p-7">
+        <h2 class="text-display text-lg font-bold">No surprises</h2>
+        <p class="prose-star mt-2 text-sm">No hidden fees and no pressure — just a plan that works for you.</p>
       </li>
     </ul>
 
-    <p class="mt-8 text-sm text-stone-400">
-      // TODO: confirm financing partner details and application process with client
-    </p>
-
-    <a href="/get-estimate" class="btn btn-primary mt-6">Get a free estimate</a>
+    <a href="/get-estimate" class="btn btn-primary mt-10">Get a Free Quote</a>
   </Section>
 
   <CtaBand />

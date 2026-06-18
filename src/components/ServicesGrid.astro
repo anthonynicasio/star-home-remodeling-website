@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { services } from '../lib/services';
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {services.map((service) => (
+    <a
+      href={`/services/${service.slug}`}
+      class="group card overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-cta)]"
+    >
+      <div class="relative aspect-[16/10] overflow-hidden">
+        <Image
+          src={service.heroImage}
+          alt={`Finished ${service.name.toLowerCase()} project completed by Star Home Remodeling in the DMV`}
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          widths={[400, 600]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="lazy"
+        />
+        <span class="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-paper/95 text-brand-700 shadow-[var(--shadow-soft)]">
+          <Icon name={service.icon} class="h-5 w-5" aria-hidden="true" />
+        </span>
+      </div>
+      <div class="p-6">
+        <h3 class="text-display text-xl font-bold text-brand-900">{service.name}</h3>
+        <p class="prose-star mt-2 text-sm">{service.cardDescription}</p>
+        <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors group-hover:text-accent">
+          Learn More
+          <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
+      </div>
+    </a>
+  ))}
+</div>

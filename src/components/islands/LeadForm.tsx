@@ -79,7 +79,7 @@ export default function LeadForm({ initialServices = [] }: LeadFormProps) {
     return (
       <div className="rounded-[var(--radius-default)] bg-brand-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-brand-700" aria-hidden="true" />
-        <h2 className="text-display mt-4 text-2xl font-bold text-brand-900">Thanks    we got it!</h2>
+        <h2 className="text-display mt-4 text-2xl font-bold text-brand-900">Thanks — we got it!</h2>
         <p className="mt-3 text-stone-400">
           We will call you within one business day to schedule your free estimate.
         </p>
@@ -139,7 +139,7 @@ export default function LeadForm({ initialServices = [] }: LeadFormProps) {
           <label htmlFor="projectDetails" className="text-display block text-xl font-bold text-brand-900">
             Tell us about your project
           </label>
-          <p className="mt-1 text-sm text-stone-400">Optional    the more detail, the better we can prepare.</p>
+          <p className="mt-1 text-sm text-stone-400">Optional — the more detail, the better we can prepare.</p>
           <textarea
             id="projectDetails"
             rows={5}
@@ -168,7 +168,7 @@ export default function LeadForm({ initialServices = [] }: LeadFormProps) {
           {errors.zip && <p className="mt-2 text-sm text-red-700" role="alert">{errors.zip.message}</p>}
           {outsideDmv && (
             <p id="zip-warning" className="mt-3 rounded-[var(--radius-default)] bg-brand-50 p-3 text-sm text-brand-900">
-              This ZIP may be outside our usual service area    but go ahead and submit. We will let you know if we can help.
+              This ZIP may be outside our usual service area — but go ahead and submit. We'll let you know if we can help.
             </p>
           )}
         </div>
@@ -206,9 +206,9 @@ export default function LeadForm({ initialServices = [] }: LeadFormProps) {
             className="mt-4 w-full max-w-sm rounded-[var(--radius-default)] border border-brand-300/50 px-4 py-3"
           >
             <option value="">No preference</option>
-            <option value="morning">Morning (8 AM    12 PM)</option>
-            <option value="afternoon">Afternoon (12 PM    5 PM)</option>
-            <option value="evening">Evening (5 PM    7 PM)</option>
+            <option value="morning">Morning (8 AM – 12 PM)</option>
+            <option value="afternoon">Afternoon (12 PM – 5 PM)</option>
+            <option value="evening">Evening (5 PM – 7 PM)</option>
           </select>
         </div>
       )}

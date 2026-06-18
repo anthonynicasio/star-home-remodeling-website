@@ -14,7 +14,12 @@ const logoModules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/brand/logo.png',
   { eager: true }
 );
-const logoSrc = Object.values(logoModules)[0]?.default as ImageMetadata | undefined;
+// The raster logo has a light background, so only use it on light surfaces.
+// The inverse (dark footer) variant falls back to the styled wordmark.
+const logoSrc =
+  variant === 'inverse'
+    ? undefined
+    : (Object.values(logoModules)[0]?.default as ImageMetadata | undefined);
 
 const wordmarkClass =
   variant === 'inverse'
@@ -36,9 +41,9 @@ const subClass =
       <Image
         src={logoSrc}
         alt="Star Home Remodeling"
-        class="h-10 w-auto max-w-[220px] object-contain object-left"
-        widths={[120, 180, 240]}
-        sizes="(max-width: 768px) 140px, 220px"
+        class="h-11 w-auto max-w-[260px] object-contain object-left sm:h-14"
+        widths={[160, 240, 320]}
+        sizes="(max-width: 768px) 180px, 280px"
         loading="eager"
       />
     ) : (
