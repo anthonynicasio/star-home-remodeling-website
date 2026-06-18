@@ -2,7 +2,8 @@
 import { siteConfig, getNapString } from '../lib/site-config';
 import { services } from '../lib/services';
 import { Icon } from 'astro-icon/components';
-import Logo from './Logo.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.png';
 
 const year = new Date().getFullYear();
 const socials = [
@@ -15,7 +16,15 @@ const socials = [
   <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
       <div>
-        <Logo variant="inverse" showWordmark={true} class="inline-flex" />
+        <a href="/" class="inline-flex" aria-label="Star Home Remodeling home">
+          <Image
+            src={logo}
+            alt="Star Home Remodeling"
+            width={176}
+            height={176}
+            class="h-20 w-20 rounded-[var(--radius-default)] bg-paper object-contain p-2 shadow-[var(--shadow-soft)]"
+          />
+        </a>
         <p class="mt-4 max-w-xs text-sm text-brand-300">
           A local, family-run home remodeling company helping DMV homeowners improve their roofing,
           siding, windows, and exterior spaces — from estimate to final walkthrough.
